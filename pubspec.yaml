@@ -38,6 +38,7 @@ dependencies:
   google_fonts: ^4.0.4
   weather: ^2.0.1
   intl: ^0.18.1
+  assorted_layout_widgets: ^8.0.0
 
 dev_dependencies:
   flutter_test:

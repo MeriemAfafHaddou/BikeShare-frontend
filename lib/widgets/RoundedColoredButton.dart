@@ -28,6 +28,7 @@ class RoundedColoredButton extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 3, horizontal: 10),
       child: TextButton(
           style: ButtonStyle(
+            padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 6, horizontal: 12)),
             fixedSize: MaterialStateProperty.all(Size(
               this.width,
               this.height,
@@ -41,11 +42,13 @@ class RoundedColoredButton extends StatelessWidget {
             ),
           ),
           onPressed: this.onPressed,
-          child: Text(
-            this.text,
-            style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500
+          child: Container(
+            child: Text(
+              this.text,
+              style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500
+              ),
             ),
           )
       ),
