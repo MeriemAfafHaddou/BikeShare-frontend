@@ -1,0 +1,35 @@
+{
+    "name": "bikeshare",
+    "short_name": "bikeshare",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#0175C2",
+    "theme_color": "#0175C2",
+    "description": "BikeSharefacilitates the process of renting bicycles for short periods. It allows users to locate and rent bikes through a mobile application. Users can search for nearby bike stations, view bike availability, and select a bike to rent. The app typically provides details about each bike, such as its location, type, and availability status. Users can make a reservation or directly unlock the bike using the app, and they are usually charged based on the rental duration.",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-maskable-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/Icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}
