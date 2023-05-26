@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'colors.dart';
+import 'config.dart';
 
 class AppTheme {
   static ThemeData defaultTheme = ThemeData(
       scaffoldBackgroundColor: AppColors.white,
       textTheme: TextTheme(
-        titleLarge: GoogleFonts.poppins(
-            fontWeight: FontWeight.w700, fontSize: 24),
+        titleLarge: GoogleFonts.pacifico(
+            fontWeight: FontWeight.w700, fontSize: 24, height: 36),
         titleMedium: GoogleFonts.poppins(
             fontWeight: FontWeight.w600, fontSize: 24),
         titleSmall: GoogleFonts.poppins(
