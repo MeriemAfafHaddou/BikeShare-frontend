@@ -39,6 +39,7 @@ dependencies:
   weather: ^2.0.1
   intl: ^0.18.1
   assorted_layout_widgets: ^8.0.0
+  flutter_credit_card: ^3.0.6
 
 dev_dependencies:
   flutter_test:
@@ -84,6 +85,9 @@ flutter:
         - asset: assets/fonts/Poppins-Medium.ttf
         - asset: assets/fonts/Poppins-SemiBold.ttf
         - asset: assets/fonts/Poppins-Bold.ttf
+    - family: Open Sans
+      fonts:
+        - asset: assets/fonts/OpenSans-Regular.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

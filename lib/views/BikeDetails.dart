@@ -36,102 +36,115 @@ class BikeDetails extends StatelessWidget {
                     ),
                   )),
               Container(
-                height: (MediaQuery.of(context).size.height * 2) / 3,
-                width: double.infinity,
-                padding: const EdgeInsets.all(30),
                 decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+                  color: AppColors.backgroungBeige,
                 ),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(bike.name,
-                          style:const TextStyle(
-                              fontFamily: 'Poppins',
-                              color:AppColors.blue,
-                              fontSize: 24,
-                              fontWeight: FontWeight.w600,
-                              height: 2
-                          )),
-                      const SizedBox(height:10),
-                      Text(
-                        bike.description,
-                          textAlign: TextAlign.justify,
-                          style:const TextStyle(
-                              fontFamily: 'Poppins',
-                              color:AppColors.darkGrey,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              height: 1.5
-                          )
+                child: Container(
+                  height: (MediaQuery.of(context).size.height * 2) / 3,
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(30),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(40), topRight: Radius.circular(40)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1),
+                        spreadRadius: 1,
+                        blurRadius: 10,
                       ),
+                    ],
 
-                      Container(
-                        margin: EdgeInsets.only(right:30),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                                "Rental Provider Information",
-                                style:TextStyle(
-                                    fontFamily: 'Poppins',
-                                    color:AppColors.yellow,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    height: 3
-                                )
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Info(label: "Name", value: bike.owner),
-                                Info(label: "Phone", value: bike.phone),
-                              ],
-                            ),
-                            const SizedBox(height:10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                              children: [
-                                Info(label: "Address", value: bike.address),
-                                Info(label: "Price", value: "${bike.price} DA/Day"),
-                              ],
-                            ),
-
-                          ],
+                  ),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(bike.name,
+                            style:const TextStyle(
+                                fontFamily: 'Poppins',
+                                color:AppColors.blue,
+                                fontSize: 24,
+                                fontWeight: FontWeight.w600,
+                                height: 2
+                            )),
+                        const SizedBox(height:10),
+                        Text(
+                          bike.description,
+                            textAlign: TextAlign.justify,
+                            style:const TextStyle(
+                                fontFamily: 'Poppins',
+                                color:AppColors.darkGrey,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                height: 1.5
+                            )
                         ),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children:[
-                        RoundedColoredButton(
-                            width: 120,
-                            height: 33,
-                            text: "Back",
-                            textColor: Colors.white,
-                            fillColor: AppColors.blue,
-                            shadowBlurRadius: 0,
-                            onPressed: (){
 
-                            }),
+                        Container(
+                          margin: EdgeInsets.only(right:30),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                  "Rental Provider Information",
+                                  style:TextStyle(
+                                      fontFamily: 'Poppins',
+                                      color:AppColors.yellow,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      height: 3
+                                  )
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Info(label: "Name", value: bike.owner),
+                                  Info(label: "Phone", value: bike.phone),
+                                ],
+                              ),
+                              const SizedBox(height:10),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                                children: [
+                                  Info(label: "Address", value: bike.address),
+                                  Info(label: "Price", value: "${bike.price} DA/Day"),
+                                ],
+                              ),
+
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children:[
                           RoundedColoredButton(
                               width: 120,
                               height: 33,
-                              text: "Rent Now",
+                              text: "Back",
                               textColor: Colors.white,
-                              fillColor: AppColors.yellow,
+                              fillColor: AppColors.blue,
                               shadowBlurRadius: 0,
                               onPressed: (){
 
-                              })
-                      ]
-                      )
+                              }),
+                            RoundedColoredButton(
+                                width: 120,
+                                height: 33,
+                                text: "Rent Now",
+                                textColor: Colors.white,
+                                fillColor: AppColors.yellow,
+                                shadowBlurRadius: 0,
+                                onPressed: (){
 
-                    ]),
+                                })
+                        ]
+                        )
+
+                      ]),
+                ),
               ),
             ],
           ),

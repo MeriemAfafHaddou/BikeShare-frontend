@@ -1,4 +1,5 @@
 import 'package:bikeshare/views/BikeDetails.dart';
+import 'package:bikeshare/views/Payment.dart';
 import 'package:bikeshare/views/home.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner:false,
-      home: BikeDetails(),
+      home: Payment(),
     );
   }
 }
