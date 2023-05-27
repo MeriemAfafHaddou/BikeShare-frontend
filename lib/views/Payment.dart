@@ -76,34 +76,116 @@ class _PaymentState extends State<Payment> {
                               fontWeight: FontWeight.w600,
                           )
                       ),
-                      CreditCardWidget(
-                        cardNumber: "374245455400126",
-                        expiryDate:"05/2026",
-                        cardHolderName: "Afaf HADDOU",
-                        cvvCode: "4621",
-                        showBackView: false,
-                        cardBgColor: AppColors.blue,
-                        onCreditCardWidgetChange: (CreditCardBrand ) {  },
-                        obscureCardNumber: true,
-                        height: 140,
-                        obscureInitialCardNumber: false,
-                        obscureCardCvv: true,
-                        isHolderNameVisible: false,
-                        textStyle: TextStyle(color: Colors.white, fontFamily: "OpenSans"),
-                        width: MediaQuery.of(context).size.width,
-                        isChipVisible: true,
-                        isSwipeGestureEnabled: true,
-                        animationDuration: Duration(milliseconds: 1000),
-                        customCardTypeIcons: <CustomCardTypeIcon>[
-                          CustomCardTypeIcon(
-                            cardType: CardType.visa,
-                            cardImage: Image.asset(
-                              'assets/images/mastercard.png',
-                              height: 48,
-                              width: 48,
+                      // CreditCardWidget(
+                      //   cardNumber: "374245455400126",
+                      //   expiryDate:"05/2026",
+                      //   cardHolderName: "Afaf HADDOU",
+                      //   cvvCode: "4621",
+                      //   showBackView: false,
+                      //   backgroundImage:'assets/images/card_bg.png',
+                      //   onCreditCardWidgetChange: (CreditCardBrand ) {  },
+                      //   obscureCardNumber: true,
+                      //   obscureInitialCardNumber: false,
+                      //   obscureCardCvv: true,
+                      //   isHolderNameVisible: false,
+                      //   textStyle: TextStyle(color: Colors.white, fontFamily: "OpenSans"),
+                      //   width: MediaQuery.of(context).size.width,
+                      //   isChipVisible: true,
+                      //   isSwipeGestureEnabled: true,
+                      //   animationDuration: Duration(milliseconds: 1000),
+                      //   customCardTypeIcons: <CustomCardTypeIcon>[
+                      //     CustomCardTypeIcon(
+                      //       cardType: CardType.visa,
+                      //       cardImage: Image.asset(
+                      //         'assets/images/visa-pay-logo.png',
+                      //         height: 30,
+                      //         width: 30,
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                      Container(
+                        width: MediaQuery.of(context).size.width*0.8,
+                        height:MediaQuery.of(context).size.height*0.25,
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          image:DecorationImage(
+                            image: AssetImage('assets/images/card_bg.png')
+                          )
+                        ),
+                        child: Column(
+                          crossAxisAlignment:CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 50,
+                              padding: const EdgeInsets.all(4),
+                              child: Image.asset(
+                                'assets/images/visa-pay-logo.png'
+                              ),
                             ),
-                          ),
-                        ],
+                            Center(
+                              child: Text(
+                                "●●●● ●●●● ●●●● 8014",
+                                  style:TextStyle(
+                                      fontFamily: 'Open Sans',
+                                      color:AppColors.white,
+                                      fontSize: 16,
+                                      letterSpacing: 3,
+                                      fontWeight: FontWeight.w200,
+                                      height: 3
+                                  )
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "CARD HOLDER",
+                                  style:TextStyle(
+                                  fontFamily: 'Open Sans',
+                                  color:AppColors.white,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w100,
+                                  height: 3
+                                  )
+                                ),
+                                Text(
+                                  "EXPIRES",
+                                    style:TextStyle(
+                                        fontFamily: 'Open Sans',
+                                        color:AppColors.white,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w100,
+                                        height: 3
+                                    )
+                                )
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Afaf HADDOU",
+                                  style:TextStyle(
+                                  fontFamily: 'Open Sans',
+                                  color:AppColors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  )
+                                ),
+                                Text(
+                                  "08/26",
+                                    style:TextStyle(
+                                        fontFamily: 'Open Sans',
+                                        color:AppColors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                    )
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                       const Text(
                           "Rental Info",
@@ -112,7 +194,6 @@ class _PaymentState extends State<Payment> {
                               color:AppColors.yellow,
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
-                              height: 2
                           )
                       ),
                       Container(
