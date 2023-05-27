@@ -26,11 +26,15 @@ class Home extends StatelessWidget {
     address: 'El Biar',
     phone: '0789898989',
   );
+
+  WeatherFactory wf = new WeatherFactory("af1120536d27c1029173735a6ab0bdbd");
   final dateToday =DateFormat.yMMMd().format(DateTime.now());
   @override
   Widget build(BuildContext context) {
     final bikeViewModel = BikeViewModel();
     final screenSize = MediaQuery.of(context).size;
+    Future<Weather> w = wf.currentWeatherByCityName("Tlemcen");
+    Future<double?> celsius = w.then((w) => w.temperature?.celsius);
     return Scaffold(
       body: Container(
         color: Colors.white,
@@ -100,18 +104,33 @@ class Home extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const Column(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("21° C",
-                              style: TextStyle(
-                                  fontFamily: 'Poppins',
-                                  color:AppColors.darkGrey,
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.w400,
-                                  height: 1.2
-                              )
-                          ),
+                  FutureBuilder<double?>(
+                    future: celsius,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        // While the future is loading
+                        return CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        // If an error occurred
+                        return Text('Error: ${snapshot.error}');
+                      } else {
+                        // When the future completes successfully
+                        double value = snapshot.data ?? 0.0; // Access the double value
+                        return Text('${value.toInt()} °C',
+                            style: TextStyle(
+                                fontFamily: 'Poppins',
+                                color:AppColors.darkGrey,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400,
+                                height: 1.2
+                            )
+                        );
+                      }
+                    },
+                  ),
                           Text("Suitable",
                               style: TextStyle(
                                   fontFamily: 'Poppins',
@@ -128,7 +147,6 @@ class Home extends StatelessWidget {
                         width: screenSize.width*0.4,
                         height: 90,
                       ),
-
                     ],
                   )
                 ],

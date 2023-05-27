@@ -130,7 +130,8 @@ class SignInPage extends StatelessWidget{
                   // }
                 },
                 shadowBlurRadius: 0),
-            const Row(
+
+            Row(
               children: [
                 Expanded(
                   child: Divider(
@@ -163,7 +164,7 @@ class SignInPage extends StatelessWidget{
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(color: Color(0xffD9D9D9))),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
@@ -180,7 +181,7 @@ class SignInPage extends StatelessWidget{
                 ],
               ),
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
@@ -190,14 +191,25 @@ class SignInPage extends StatelessWidget{
                     color: Colors.black,
                   ),
                 ),
-                Text(
-                  'Sign up',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: AppColors.yellow,
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
+                TextButton(
+                    onPressed: ()=>{
+                      Navigator.of(context).pushNamed("/signUp")
+                    },
+                    style:TextButton.styleFrom(
+                      minimumSize: Size.zero,
+                      padding: EdgeInsets.only(right:15, left:15),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                    child: Text(
+                      'Sign up',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: AppColors.yellow,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),),
+
+
               ],
             ),
           ],
