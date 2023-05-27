@@ -40,6 +40,7 @@ dependencies:
   intl: ^0.18.1
   assorted_layout_widgets: ^8.0.0
   flutter_credit_card: ^3.0.6
+  google_maps_flutter: ^2.2.8
 
 dev_dependencies:
   flutter_test:

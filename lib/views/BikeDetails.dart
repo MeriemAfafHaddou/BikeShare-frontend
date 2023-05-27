@@ -121,14 +121,14 @@ class BikeDetails extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children:[
                           RoundedColoredButton(
-                              width: 120,
+                              width: 100,
                               height: 33,
                               text: "Back",
                               textColor: Colors.white,
                               fillColor: AppColors.blue,
                               shadowBlurRadius: 0,
                               onPressed: (){
-
+                                Navigator.of(context).pushNamed("/home");
                               }),
                             RoundedColoredButton(
                                 width: 120,
@@ -138,7 +138,7 @@ class BikeDetails extends StatelessWidget {
                                 fillColor: AppColors.yellow,
                                 shadowBlurRadius: 0,
                                 onPressed: (){
-
+                                  Navigator.of(context).pushNamed("/payment");
                                 })
                         ]
                         )

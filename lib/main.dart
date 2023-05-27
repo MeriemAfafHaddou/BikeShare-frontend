@@ -1,5 +1,6 @@
 import 'package:bikeshare/views/BikeCode.dart';
 import 'package:bikeshare/views/BikeDetails.dart';
+import 'package:bikeshare/views/Map.dart';
 import 'package:bikeshare/views/Payment.dart';
 import 'package:bikeshare/views/home.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +16,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {
+        "/home": (_)=> Home(),
+        "/details": (_)=> BikeDetails(),
+        "/payment": (_)=> Payment(),
+        "/code": (_)=> BikeCode(),
+        "/map": (_)=> Map(),
+      },
       debugShowCheckedModeBanner:false,
-      home: BikeCode(),
+      home: Home(),
     );
   }
 }

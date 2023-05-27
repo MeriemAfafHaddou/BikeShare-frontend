@@ -233,7 +233,9 @@ class Home extends StatelessWidget {
                               textColor: AppColors.white,
                               fillColor: AppColors.yellow,
                               shadowBlurRadius: 0,
-                              onPressed: (){}),
+                              onPressed: (){
+                                Navigator.of(context).pushNamed("/details");
+                              }),
                         ),
                       ],
                     ),

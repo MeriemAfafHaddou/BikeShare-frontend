@@ -24,12 +24,12 @@ class _BikeCodeState extends State<BikeCode> {
                 ),
                 Container(
                   child: Container(
-                    padding:EdgeInsets.all(30),
+                    padding: const EdgeInsets.all(30),
                     height: MediaQuery.of(context).size.height*5/6,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         color: AppColors.white,
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                             topRight: Radius.circular(40),
                             topLeft: Radius.circular(40)
                         ),
@@ -103,7 +103,7 @@ class _BikeCodeState extends State<BikeCode> {
                                     fillColor: AppColors.blue,
                                     shadowBlurRadius: 0,
                                     onPressed: (){
-
+                                      Navigator.of(context).pushNamed("/payment");
                                     }),
                                 RoundedColoredButton(
                                   width: 140,
@@ -113,7 +113,7 @@ class _BikeCodeState extends State<BikeCode> {
                                   fillColor: AppColors.yellow,
                                   shadowBlurRadius: 0,
                                   onPressed: (){
-
+                                    Navigator.of(context).pushNamed("/map");
                                   },
                                 )
                               ]

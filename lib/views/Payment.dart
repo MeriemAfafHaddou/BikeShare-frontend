@@ -241,7 +241,7 @@ class _PaymentState extends State<Payment> {
                                 fillColor: AppColors.blue,
                                 shadowBlurRadius: 0,
                                 onPressed: (){
-
+                                  Navigator.of(context).pushNamed("/details");
                                 }),
                             RoundedColoredButton(
                                 width: 140,
@@ -323,7 +323,7 @@ class _PaymentState extends State<Payment> {
                                                                 shadowBlurRadius:
                                                                     0,
                                                                 onPressed:(){
-                                                                  Navigator.of(context).pop();
+                                                                  Navigator.of(context).pushNamed("/code");
                                                                 }
                                                                     ),
                                                           )
