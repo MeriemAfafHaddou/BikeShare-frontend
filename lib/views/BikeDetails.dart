@@ -7,18 +7,11 @@ import '../models/Bike.dart';
 
 class BikeDetails extends StatelessWidget {
   BikeDetails({Key? key}) : super(key: key);
-  final bike=Bike(
-    id:1,
-    name: "Vintage Bike",
-    description: "Discover the Vintage Cruiser, a timeless symbol of elegance and nostalgia. With its classic design, sturdy steel frame, and vintage-inspired details, this bike captures the essence of a bygone era.",
-    owner: 'Lyna Chikouche',
-    price: 1200,
-    address: 'El Biar',
-    phone: '0789898989',
-  );
+
 
   @override
   Widget build(BuildContext context) {
+    final bike=ModalRoute.of(context)!.settings.arguments as Bike;
     return Scaffold(
       body: SafeArea(
         child: Stack(children: [
@@ -138,7 +131,9 @@ class BikeDetails extends StatelessWidget {
                                 fillColor: AppColors.yellow,
                                 shadowBlurRadius: 0,
                                 onPressed: (){
-                                  Navigator.of(context).pushNamed("/payment");
+                                  Navigator.of(context).pushNamed(
+                                      "/payment",
+                                      arguments:bike);
                                 })
                         ]
                         )

@@ -1,7 +1,5 @@
 import 'package:bikeshare/config/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_credit_card/flutter_credit_card.dart';
-
 import '../models/Bike.dart';
 import '../widgets/PopUp.dart';
 import '../widgets/RoundedColoredButton.dart';
@@ -29,6 +27,7 @@ class _PaymentState extends State<Payment> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body:Stack(
         children: [
@@ -404,7 +403,10 @@ class _PaymentState extends State<Payment> {
                                                                 shadowBlurRadius:
                                                                     0,
                                                                 onPressed:(){
-                                                                  Navigator.of(context).pushNamed("/code");
+                                                                  Navigator.of(context).pushNamed(
+                                                                      "/code",
+                                                                      arguments: bike
+                                                                  );
                                                                 }
                                                                     ),
                                                           )

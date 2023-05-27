@@ -42,6 +42,9 @@ dependencies:
   flutter_credit_card: ^3.0.6
   google_maps_flutter: ^2.2.8
   google_maps_routes: ^1.1.2
+  retrofit: ^4.0.1
+  json_annotation: ^4.8.1
+  http: ^0.13.6
 
 dev_dependencies:
   flutter_test:

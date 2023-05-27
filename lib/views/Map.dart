@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../config/colors.dart';
 import '../models/Bike.dart';
+import 'package:google_maps_routes/google_maps_routes.dart';
 
 class Map extends StatefulWidget {
   const Map({Key? key}) : super(key: key);
@@ -34,12 +35,22 @@ class _MapState extends State<Map> {
 
   static const CameraPosition _kLake = CameraPosition(
       bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
+      target: LatLng(36.767538082863894, 3.0337982122806584),
       tilt: 59.440717697143555,
       zoom: 19.151926040649414);
-
+  /// LatLng is included in google_maps_flutter
+  List<LatLng> points = [
+    LatLng(36.767538082863894, 3.0337982122806584),
+    LatLng(36.72229771347806, 3.174318610868156)
+  ];
+  MapsRoutes route = new MapsRoutes();
   @override
   Widget build(BuildContext context) {
+  if(time==0){
+    setState(() {
+      route.routes.clear();
+    });
+  }
     return Scaffold(
         body:Stack(
           children: [
@@ -48,10 +59,18 @@ class _MapState extends State<Map> {
                 Container(
                   height: MediaQuery.of(context).size.height*3/5,
                   child: GoogleMap(
+                    polylines: route.routes,
                     mapType: MapType.hybrid,
                     initialCameraPosition: _kGooglePlex,
-                    onMapCreated: (GoogleMapController controller) {
+                    onMapCreated: (GoogleMapController controller) async {
                       _controller.complete(controller);
+                      await route.drawRoute(
+                          points,
+                          "to bycicle",
+                          AppColors.blue,
+                          "bikeshare-387918",
+                          travelMode: TravelModes.bicycling);
+
                     },
                   ),
                 ),

@@ -15,5 +15,19 @@ class Bike{
     required this.address,
     required this.phone
 });
+  factory Bike.fromJson(Map<String, dynamic> json) {
+    return Bike(
+      id: json['id'],
+      name: json['name'],
+      description: json['description'],
+      owner: json['owner'],
+      price: json['price'].toInt(),
+      address: json['address'],
+      phone: json['phone'],
+    );
+  }
+}
+
+class Results{
 
 }

@@ -2,6 +2,7 @@ import 'package:bikeshare/views/BikeCode.dart';
 import 'package:bikeshare/views/BikeDetails.dart';
 import 'package:bikeshare/views/Map.dart';
 import 'package:bikeshare/views/Payment.dart';
+import 'package:bikeshare/views/SignIn.dart';
 import 'package:bikeshare/views/home.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         "/map": (_)=> Map(),
       },
       debugShowCheckedModeBanner:false,
-      home: Home(),
+      home: SignInPage(),
     );
   }
 }

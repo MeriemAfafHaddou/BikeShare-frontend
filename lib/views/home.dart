@@ -1,6 +1,7 @@
 import 'package:bikeshare/config/config.dart';
 import 'package:bikeshare/models/Bike.dart';
 import 'package:bikeshare/models/User.dart';
+import 'package:bikeshare/viewmodels/BikeViewModel.dart';
 import 'package:bikeshare/widgets/RoundedColoredButton.dart';
 import 'package:flutter/material.dart';
 import 'package:weather/weather.dart';
@@ -28,6 +29,7 @@ class Home extends StatelessWidget {
   final dateToday =DateFormat.yMMMd().format(DateTime.now());
   @override
   Widget build(BuildContext context) {
+    final bikeViewModel = BikeViewModel();
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
@@ -144,104 +146,216 @@ class Home extends StatelessWidget {
 
             ),
             Expanded(
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (context,index){
-                  return Container(
-                    margin: const EdgeInsets.only(right: 10, top:10),
-                    width: screenSize.width*0.65,
-                    height: 240,
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(
-                          color: AppColors.blue,
-                          width: 0.5,
-                          style: BorderStyle.solid
-                      ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Image.asset(
-                            'assets/images/bycicle.png', // Replace with your image path
-                            width: screenSize.width*0.6,
-                            fit: BoxFit.cover,),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(left:10, top:20),
-                          child: Text(
-                              bike.name,
-                              style: const TextStyle(
-                                  fontFamily: 'Poppins',
-                                  color:AppColors.darkGrey,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  height: 1.2
-                              )
+              child: FutureBuilder<List<Bike>>(
+                future:bikeViewModel.fetchBikes(),
+                builder:(context, snapshot){
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasData) {
+                    return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: snapshot!.data?.length,
+                      itemBuilder: (context,index){
+                        return Container(
+                          margin: const EdgeInsets.only(right: 10, top:10),
+                          width: screenSize.width*0.65,
+                          height: 240,
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(
+                                color: AppColors.blue,
+                                width: 0.5,
+                                style: BorderStyle.solid
+                            ),
                           ),
-                        ),
-                        Container(
-                          margin:EdgeInsets.only(top:10, left:10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                bike.owner,
-                                  style: const TextStyle(
-                                      fontFamily: 'Poppins',
-                                      color:AppColors.darkGrey,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500,
-                                      height: 1.2
-                                  )
+                              Center(
+                                child: Image.asset(
+                                  'assets/images/bycicle.png', // Replace with your image path
+                                  width: screenSize.width*0.6,
+                                  fit: BoxFit.cover,),
                               ),
-                              const Text(
-                                '- 700m far',
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      color:AppColors.darkGrey,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400,
-                                      height: 1.2
-                                  )
+                              Container(
+                                margin: const EdgeInsets.only(left:10, top:20),
+                                child: Text(
+                                    snapshot.data![index].name,
+                                    style: const TextStyle(
+                                        fontFamily: 'Poppins',
+                                        color:AppColors.darkGrey,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                        height: 1.2
+                                    )
+                                ),
+                              ),
+                              Container(
+                                margin:EdgeInsets.only(top:10, left:10),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                        snapshot.data![index].owner,
+                                        style: const TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color:AppColors.darkGrey,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500,
+                                            height: 1.2
+                                        )
+                                    ),
+                                    const Text(
+                                        '- 700m far',
+                                        style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color:AppColors.darkGrey,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400,
+                                            height: 1.2
+                                        )
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin:EdgeInsets.only(left:10),
+                                child: Text(
+                                    "${snapshot.data![index].price} DA/Day",
+                                    style: const TextStyle(
+                                        fontFamily: 'Poppins',
+                                        color:AppColors.darkGrey,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                        height: 2
+                                    )
+                                ),
+                              ),
+                              Align(
+                                alignment:Alignment.centerRight,
+                                child: RoundedColoredButton(
+                                    width: 100,
+                                    height: 40,
+                                    text: "Rent now",
+                                    textColor: AppColors.white,
+                                    fillColor: AppColors.yellow,
+                                    shadowBlurRadius: 0,
+                                    onPressed: (){
+                                      Navigator.of(context).pushNamed(
+                                        "/details",
+                                        arguments: snapshot.data![index]
+                                      );
+                                    }),
                               ),
                             ],
                           ),
-                        ),
-                       Container(
-                         margin:EdgeInsets.only(left:10),
-                         child: Text(
-                           "${bike.price} DA/Day",
-                             style: const TextStyle(
-                                 fontFamily: 'Poppins',
-                                 color:AppColors.darkGrey,
-                                 fontSize: 12,
-                                 fontWeight: FontWeight.w600,
-                                 height: 2
-                             )
-                         ),
-                       ),
-                        Align(
-                          alignment:Alignment.centerRight,
-                          child: RoundedColoredButton(
-                              width: 100,
-                              height: 40,
-                              text: "Rent now",
-                              textColor: AppColors.white,
-                              fillColor: AppColors.yellow,
-                              shadowBlurRadius: 0,
-                              onPressed: (){
-                                Navigator.of(context).pushNamed("/details");
-                              }),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+                        );
+                      },
+                    );
+                  }else {
 
+                    return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 10,
+                      itemBuilder: (context,index){
+                        return Container(
+                          margin: const EdgeInsets.only(right: 10, top:10),
+                          width: screenSize.width*0.65,
+                          height: 240,
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(
+                                color: AppColors.blue,
+                                width: 0.5,
+                                style: BorderStyle.solid
+                            ),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Center(
+                                child: Image.asset(
+                                  'assets/images/bycicle.png', // Replace with your image path
+                                  width: screenSize.width*0.6,
+                                  fit: BoxFit.cover,),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(left:10, top:20),
+                                child: Text(
+                                    bike.name,
+                                    style: const TextStyle(
+                                        fontFamily: 'Poppins',
+                                        color:AppColors.darkGrey,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                        height: 1.2
+                                    )
+                                ),
+                              ),
+                              Container(
+                                margin:EdgeInsets.only(top:10, left:10),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                        bike.owner,
+                                        style: const TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color:AppColors.darkGrey,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500,
+                                            height: 1.2
+                                        )
+                                    ),
+                                    const Text(
+                                        '- 700m far',
+                                        style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color:AppColors.darkGrey,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400,
+                                            height: 1.2
+                                        )
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin:EdgeInsets.only(left:10),
+                                child: Text(
+                                    "${bike.price} DA/Day",
+                                    style: const TextStyle(
+                                        fontFamily: 'Poppins',
+                                        color:AppColors.darkGrey,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                        height: 2
+                                    )
+                                ),
+                              ),
+                              Align(
+                                alignment:Alignment.centerRight,
+                                child: RoundedColoredButton(
+                                    width: 100,
+                                    height: 40,
+                                    text: "Rent now",
+                                    textColor: AppColors.white,
+                                    fillColor: AppColors.yellow,
+                                    shadowBlurRadius: 0,
+                                    onPressed: (){
+                                      Navigator.of(context).pushNamed("/details", arguments: bike);
+                                    }),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+
+                    );
+                  }
+                }
               ),
             ),
           ],
