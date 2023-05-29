@@ -174,6 +174,8 @@ class Home extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemCount: snapshot!.data?.length,
                       itemBuilder: (context,index){
+                        snapshot.data?[index].owner="Lyna Chikouche";
+                        snapshot.data?[index].phone="0777796960";
                         return Container(
                           margin: const EdgeInsets.only(right: 10, top:10),
                           width: screenSize.width*0.65,
@@ -272,7 +274,6 @@ class Home extends StatelessWidget {
                       },
                     );
                   }else {
-
                     return ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: 10,

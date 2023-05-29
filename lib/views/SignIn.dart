@@ -42,7 +42,7 @@ class SignInPage extends StatelessWidget{
                   hintText: 'Enter your email',
                   hintStyle: const TextStyle(
                     fontSize: 14,
-                    color: Color(0xff9BAEBC),
+                    color: AppColors.grey,
                   ),
                   filled: false,
                   contentPadding: const EdgeInsets.only(left: 15,top: 5,bottom: 5),
@@ -56,22 +56,24 @@ class SignInPage extends StatelessWidget{
             ),
             TextField(
               controller: passwordController,
+              obscureText: true,
               decoration: InputDecoration(
                   hintText: 'Enter your password',
                   hintStyle: const TextStyle(
                     fontSize: 14,
-                    color: Color(0xff9BAEBC),
+                    color: AppColors.grey,
                   ),
                   filled: false,
                   contentPadding: const EdgeInsets.only(left: 15,top: 5,bottom: 5),
-                  border: OutlineInputBorder(
+                  enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                     borderSide: const BorderSide(
-                      width: 1.0,
+                      width: 1,
                       color: AppColors.blue,
                     ),
                   )),
             ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

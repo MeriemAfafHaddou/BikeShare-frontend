@@ -5,7 +5,7 @@ import 'dart:convert';
 
 class CreditCardViewModel extends ChangeNotifier {
   late Future<CreditCard> creditCard;
-  Future<CreditCard> fetchBikes() async {
+  Future<CreditCard> getCreditCard() async {
     final url = 'https://api.example.com/bikes'; // Replace with your API endpoint
 
     try {
@@ -16,10 +16,10 @@ class CreditCardViewModel extends ChangeNotifier {
         this.creditCard=data;
         return data;
       } else {
-        throw Exception('Failed to fetch bikes');
+        throw Exception('Failed to fetch credit card');
       }
     } catch (error) {
-      throw Exception('Failed to fetch bikes: $error');
+      throw Exception('Failed to fetch credit card: $error');
     }
   }
 

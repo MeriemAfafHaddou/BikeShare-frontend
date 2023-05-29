@@ -76,7 +76,7 @@ class SignUpPage extends StatelessWidget {
                   ),
                   filled: false,
                   contentPadding: const EdgeInsets.only(left: 15,top: 5,bottom: 5),
-                  border: OutlineInputBorder(
+                  enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                     borderSide: const BorderSide(
                       width: 1.0,
@@ -94,7 +94,7 @@ class SignUpPage extends StatelessWidget {
                   ),
                   filled: false,
                   contentPadding: const EdgeInsets.only(left: 15,top: 5,bottom: 5),
-                  border: OutlineInputBorder(
+                  enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                     borderSide: const BorderSide(
                       width: 1.0,
@@ -112,7 +112,7 @@ class SignUpPage extends StatelessWidget {
                   ),
                   filled: false,
                   contentPadding: const EdgeInsets.only(left: 15,top: 5,bottom: 5),
-                  border: OutlineInputBorder(
+                  enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                     borderSide: const BorderSide(
                       width: 1.0,
@@ -130,7 +130,7 @@ class SignUpPage extends StatelessWidget {
                   ),
                   filled: false,
                   contentPadding: const EdgeInsets.only(left: 15,top: 5,bottom: 5),
-                  border: OutlineInputBorder(
+                  enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                     borderSide: const BorderSide(
                       width: 1.0,
@@ -146,7 +146,7 @@ class SignUpPage extends StatelessWidget {
                 fillColor: AppColors.yellow,
                 onPressed: () {
                   Navigator.of(context)
-                      .pushNamed("/home");
+                      .pushNamed("/sms");
                   // await login(emailController.text,passwordController.text);
                   // if(global.globalSessionData?.userId!=null){
                   //   FirebaseMessaging messaging = FirebaseMessaging.instance;

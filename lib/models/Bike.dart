@@ -17,12 +17,12 @@ class Bike{
 });
   factory Bike.fromJson(Map<String, dynamic> json) {
     return Bike(
-      id: json['id'],
+      id: json['_id'],
       name: json['name'],
       description: json['description'],
       owner: json['owner'],
       price: json['price'].toInt(),
-      address: json['address'],
+      address: json['location'],
       phone: json['phone'],
     );
   }
