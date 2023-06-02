@@ -1,19 +1,35 @@
 import 'package:bikeshare/config/colors.dart';
+import 'package:bikeshare/models/User.dart';
+import 'package:bikeshare/viewmodels/UserViewModel.dart';
 import 'package:bikeshare/widgets/RoundedColoredButton.dart';
 import 'package:flutter/material.dart';
-
+import '../global.dart' as global;
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+  SignUpPage({Key? key}) : super(key: key);
 
-
+  var emailController= TextEditingController();
+  var fullNameController= TextEditingController();
+  var pwdController= TextEditingController();
+  var phoneController= TextEditingController();
+  var addressController= TextEditingController();
+  showLoaderDialog(BuildContext context){
+    AlertDialog alert=AlertDialog(
+      content: Row(
+        children: [
+          const CircularProgressIndicator(),
+          Container(margin: const EdgeInsets.only(left: 10),child:Text("Loading..." )),
+        ],),
+    );
+    showDialog(barrierDismissible: false,
+      context:context,
+      builder:(BuildContext context){
+        return alert;
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
-    var emailController;
-    var fullNameController;
-    var lastNameController;
-    var pwdController;
-    var confirmPwdController;
-    var phoneController;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -86,6 +102,7 @@ class SignUpPage extends StatelessWidget {
             ),
             TextField(
               controller: pwdController,
+              obscureText: true,
               decoration: InputDecoration(
                   hintText: 'Password',
                   hintStyle: const TextStyle(
@@ -103,9 +120,9 @@ class SignUpPage extends StatelessWidget {
                   )),
             ),
             TextField(
-              controller: confirmPwdController,
+              controller: addressController,
               decoration: InputDecoration(
-                  hintText: 'Confirm password',
+                  hintText: 'Address',
                   hintStyle: const TextStyle(
                     fontSize: 14,
                     color: Color(0xff9BAEBC),
@@ -144,20 +161,24 @@ class SignUpPage extends StatelessWidget {
                 text: 'Next',
                 textColor: Colors.white,
                 fillColor: AppColors.yellow,
-                onPressed: () {
+                onPressed: () async {
+                  showLoaderDialog(context);
+                  final User user= User(
+                      name: fullNameController.text,
+                      password: pwdController.text,
+                      phone: phoneController.text,
+                      email: emailController.text,
+                      address: addressController.text);
+                  print("${user.name} - ${user.password} - ${user.phone} - ${user.email} - ${user.address}");
+                  global.globalSessionData?.name=user.name;
+                  global.globalSessionData?.email=user.email;
+                  global.globalSessionData?.password=user.password;
+                  global.globalSessionData?.address=user.address;
+                  final userVM=UserViewModel();
+                  await userVM.register(user);
+                  await userVM.login(user.email, user.password);
                   Navigator.of(context)
                       .pushNamed("/sms");
-                  // await login(emailController.text,passwordController.text);
-                  // if(global.globalSessionData?.userId!=null){
-                  //   FirebaseMessaging messaging = FirebaseMessaging.instance;
-                  //   String? token = await messaging.getToken();
-                  //   global.globalSessionData?.token=token!;
-                  //   addToken(token!);
-                  //   Navigator.of(context)
-                  //       .pushNamed("/home");
-                  // }else{
-                  //   print("incorrect credentials !");
-                  // }
                 },
                 shadowBlurRadius: 0),
             SizedBox(

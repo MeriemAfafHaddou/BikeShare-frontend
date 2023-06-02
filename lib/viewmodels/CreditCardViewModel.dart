@@ -6,7 +6,7 @@ import 'dart:convert';
 class CreditCardViewModel extends ChangeNotifier {
   late Future<CreditCard> creditCard;
   Future<CreditCard> getCreditCard() async {
-    final url = 'https://api.example.com/bikes'; // Replace with your API endpoint
+    final url = 'https://paymentms.onrender.com/creditcards/:idOwner'; // Replace with your API endpoint
 
     try {
       final response = await http.get(Uri.parse(url));

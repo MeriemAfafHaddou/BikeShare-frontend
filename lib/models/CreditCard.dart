@@ -11,10 +11,10 @@ class CreditCard{
 });
   factory CreditCard.fromJson(Map<String, dynamic> json) {
     return CreditCard(
-      id: json['id'],
+      id: json['_id'],
       number: json['number'],
-      name: json['name'],
-      exp: json['exp'],
+      name:"Afaf haddou",
+      exp: json['expiringDate'],
     );
   }
 

@@ -1,11 +1,12 @@
 class Bike{
-  late int id;
+  late String id;
   late String name;
   late String description;
   late String owner;
   late int price;
   late String address;
   late String phone;
+  late String image;
   Bike({
     required this.id,
     required this.name,
@@ -19,15 +20,11 @@ class Bike{
     return Bike(
       id: json['_id'],
       name: json['name'],
-      description: json['description'],
-      owner: json['owner'],
+      description: json['type'],
+      owner: "Lyna Chikouche",
       price: json['price'].toInt(),
       address: json['location'],
-      phone: json['phone'],
+      phone: "077777777",
     );
   }
-}
-
-class Results{
-
 }

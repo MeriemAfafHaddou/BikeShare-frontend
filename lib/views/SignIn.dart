@@ -1,4 +1,5 @@
 import 'package:bikeshare/config/colors.dart';
+import 'package:bikeshare/viewmodels/UserViewModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../widgets/RoundedColoredButton.dart';
@@ -6,6 +7,23 @@ import '../widgets/RoundedColoredButton.dart';
 class SignInPage extends StatelessWidget{
   final emailController = TextEditingController();
   final passwordController=TextEditingController();
+  showLoaderDialog(BuildContext context){
+    AlertDialog alert=AlertDialog(
+      content: Row(
+        children: [
+          const CircularProgressIndicator(),
+          Container(margin: const EdgeInsets.only(left: 10),child:Text("Loading..." )),
+        ],),
+    );
+    showDialog(barrierDismissible: false,
+      context:context,
+      builder:(BuildContext context){
+        return alert;
+      },
+    );
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -116,20 +134,12 @@ class SignInPage extends StatelessWidget{
                 text: 'Sign In',
                 textColor: Colors.white,
                 fillColor: AppColors.yellow,
-                onPressed: () {
-                    Navigator.of(context)
-                        .pushNamed("/home");
-                  // await login(emailController.text,passwordController.text);
-                  // if(global.globalSessionData?.userId!=null){
-                  //   FirebaseMessaging messaging = FirebaseMessaging.instance;
-                  //   String? token = await messaging.getToken();
-                  //   global.globalSessionData?.token=token!;
-                  //   addToken(token!);
-                  //   Navigator.of(context)
-                  //       .pushNamed("/home");
-                  // }else{
-                  //   print("incorrect credentials !");
-                  // }
+                onPressed: () async {
+                  showLoaderDialog(context);
+                  final vm=UserViewModel();
+                  await vm.login(emailController.text, passwordController.text);
+                  Navigator.of(context)
+                        .pushNamed("/sms");
                 },
                 shadowBlurRadius: 0),
 

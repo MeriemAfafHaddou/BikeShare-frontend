@@ -1,4 +1,5 @@
 import 'package:bikeshare/config/colors.dart';
+import 'package:bikeshare/viewmodels/UserViewModel.dart';
 import 'package:bikeshare/widgets/RoundedColoredButton.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_text_field.dart';
@@ -10,12 +11,7 @@ class SmsAuth extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var emailController;
-    var fullNameController;
-    var lastNameController;
-    var pwdController;
-    var confirmPwdController;
-    var phoneController;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -30,7 +26,7 @@ class SmsAuth extends StatelessWidget {
             ),
             Center(
               child: const Text(
-                'Sign Up',
+                'Sign In',
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 34,
@@ -81,6 +77,8 @@ class SmsAuth extends StatelessWidget {
                 textFieldAlignment: MainAxisAlignment.spaceAround,
                 fieldStyle: FieldStyle.box,
                 onCompleted: (pin) {
+                  final userVM=UserViewModel();
+                  userVM.doubleAuth(pin);
                   print("Completed: " + pin);
                 },
               ),

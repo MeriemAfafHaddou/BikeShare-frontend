@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import '../config/colors.dart';
@@ -11,9 +13,9 @@ class BikeCode extends StatefulWidget {
 }
 
 class _BikeCodeState extends State<BikeCode> {
-  int code=1404;
   @override
   Widget build(BuildContext context) {
+    String code=ModalRoute.of(context)?.settings.arguments as String;
     return Scaffold(
         body:Stack(
           children: [
@@ -69,7 +71,7 @@ class _BikeCodeState extends State<BikeCode> {
                             )),
                         Center(
                           child: Text(
-                            code!.toString(),
+                            code,
                             style:const TextStyle(
                             fontFamily: 'Poppins',
                             color:AppColors.blue,

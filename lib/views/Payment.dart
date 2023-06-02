@@ -1,4 +1,7 @@
 import 'package:bikeshare/config/colors.dart';
+import 'package:bikeshare/models/CreditCard.dart';
+import 'package:bikeshare/viewmodels/CreditCardViewModel.dart';
+import 'package:bikeshare/viewmodels/RentalViewModel.dart';
 import 'package:flutter/material.dart';
 import '../models/Bike.dart';
 import '../widgets/PopUp.dart';
@@ -7,27 +10,36 @@ import '../widgets/info.dart';
 
 class Payment extends StatefulWidget {
   Payment({Key? key}) : super(key: key);
-
   @override
   State<Payment> createState() => _PaymentState();
 }
 
 class _PaymentState extends State<Payment> {
-  final bike=Bike(
-    id:1,
-    name: "Vintage Bike",
-    description: "Discover the Vintage Cruiser, a timeless symbol of elegance and nostalgia. With its classic design, sturdy steel frame, and vintage-inspired details, this bike captures the essence of a bygone era.",
-    owner: 'Lyna Chikouche',
-    price: 1200,
-    address: 'El Biar',
-    phone: '0789898989',
-  );
-
+  late CreditCardViewModel vm;
+  @override
+  void initState() {
+    // TODO: implement initState
+    vm.getCreditCard();
+  }
   int days=1;
-
+  showLoaderDialog(BuildContext context){
+    AlertDialog alert=AlertDialog(
+      content: Row(
+        children: [
+          const CircularProgressIndicator(),
+          Container(margin: const EdgeInsets.only(left: 10),child:Text("Loading..." )),
+        ],),
+    );
+    showDialog(barrierDismissible: false,
+      context:context,
+      builder:(BuildContext context){
+        return alert;
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
-
+    final bike=ModalRoute.of(context)?.settings.arguments as Bike;
     return Scaffold(
       body:Stack(
         children: [
@@ -124,7 +136,7 @@ class _PaymentState extends State<Payment> {
                             ),
                             Center(
                               child: Text(
-                                "●●●● ●●●● ●●●● 8014",
+                                "●●●● ●●●● ●●●● ${vm.creditCard.then((value) => value.number)}",
                                   style:TextStyle(
                                       fontFamily: 'Open Sans',
                                       color:AppColors.white,
@@ -164,7 +176,7 @@ class _PaymentState extends State<Payment> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "Afaf HADDOU",
+                                  "${vm.creditCard.then((value) => value.name)}",
                                   style:TextStyle(
                                   fontFamily: 'Open Sans',
                                   color:AppColors.white,
@@ -173,7 +185,7 @@ class _PaymentState extends State<Payment> {
                                   )
                                 ),
                                 Text(
-                                  "08/26",
+                                  "${vm.creditCard.then((value) => value.exp)}",
                                     style:TextStyle(
                                         fontFamily: 'Open Sans',
                                         color:AppColors.white,
@@ -203,7 +215,7 @@ class _PaymentState extends State<Payment> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Info(label: "Bike ID", value: bike.id.toString()),
+                                Info(label: "Bike ID", value: bike.id.toString().substring(1,5)),
                                 Info(label: "Bike Type", value: bike.name),
                               ],
                             ),
@@ -301,7 +313,7 @@ class _PaymentState extends State<Payment> {
                           )
                       ),
                       Text(
-                          "${days*bike.price} DA",
+                          "${days*bike.price} \$",
                           style:const TextStyle(
                               fontFamily: 'Poppins',
                               color:AppColors.blue,
@@ -340,7 +352,11 @@ class _PaymentState extends State<Payment> {
                                         onPressed1: (){
                                           Navigator.of(context).pop();
                                         },
-                                        onPressed2: (){
+                                        onPressed2: ()async{
+                                          showLoaderDialog(context);
+                                          late String code;
+                                          final vm = RentalViewModel();
+                                          code=vm.rent(bike.id, days, bike.price) as String;
                                           Navigator.of(context).pop();
                                           showDialog(
                                               context: context,
@@ -405,7 +421,7 @@ class _PaymentState extends State<Payment> {
                                                                 onPressed:(){
                                                                   Navigator.of(context).pushNamed(
                                                                       "/code",
-                                                                      arguments: bike
+                                                                      arguments: code
                                                                   );
                                                                 }
                                                                     ),
@@ -432,9 +448,7 @@ class _PaymentState extends State<Payment> {
             top:MediaQuery.of(context).size.height*1/24,
             child: Container(
               width: MediaQuery.of(context).size.width*0.5,
-              child: const Image(
-                image: AssetImage("assets/images/bycicle.png"),
-              ),
+              child: Image.asset(bike.image)
             ),
           )
         ],

@@ -1,24 +1,26 @@
 class User{
-  late String firstName;
-  late String lastName;
+  late String name;
+  late String password;
   late String phone;
   late String email;
-  late String position;
+  late String address;
   User({
-    required this.firstName,
-    required this.lastName,
+    required this.name,
+    required this.password,
     required this.phone,
     required this.email,
-    required this.position
+    required this.address
 });
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      firstName: json['firstName'],
-      lastName: json['lastName'],
+      name: json['name'],
+      password: json['password'],
       phone: json['phone'],
       email: json['email'],
-      position: json['position']
+      address: json['address']
     );
   }
 
 }
+
+late final User userInfos;

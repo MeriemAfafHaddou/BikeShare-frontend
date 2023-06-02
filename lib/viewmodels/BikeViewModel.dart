@@ -6,11 +6,8 @@ import 'dart:convert';
 class BikeViewModel extends ChangeNotifier {
   late Future<List<Bike>> bikes;
   Future<List<Bike>> fetchBikes() async {
-    print("ffffff");
-    final url = Uri.parse('localhost:3000/bikes');
-    print("ffffff");
+    final url = Uri.parse('https://bikerentalms.onrender.com/bikes');
     final response = await http.get(url);
-    print("ffffff");
     print("Response : ${response.statusCode}");
     if (response.statusCode == 200) {
       List myList = jsonDecode(response.body);

@@ -11,7 +11,7 @@ class BikeDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bike=ModalRoute.of(context)!.settings.arguments as Bike;
+    final bike=ModalRoute.of(context)?.settings.arguments as Bike;
     return Scaffold(
       body: SafeArea(
         child: Stack(children: [
@@ -25,7 +25,7 @@ class BikeDetails extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical:30, horizontal: 10),
                     child: Image.asset(
-                      "assets/images/bycicle.png",
+                      bike.image,
                     ),
                   )),
               Container(
@@ -100,7 +100,7 @@ class BikeDetails extends StatelessWidget {
 
                                 children: [
                                   Info(label: "Address", value: bike.address),
-                                  Info(label: "Price", value: "${bike.price} DA/Day"),
+                                  Info(label: "Price", value: "${bike.price} \$/Day"),
                                 ],
                               ),
 

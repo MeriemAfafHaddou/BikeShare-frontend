@@ -6,6 +6,7 @@ class Rental{
   late DateTime end;
   late double price;
   late String status;
+  late String code;
   Rental({
     required id,
     required userId,

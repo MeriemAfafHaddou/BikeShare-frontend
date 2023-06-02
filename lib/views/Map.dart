@@ -16,7 +16,7 @@ class Map extends StatefulWidget {
 class _MapState extends State<Map> {
   int time = 25;
   final bike=Bike(
-    id:1,
+    id:"1",
     name: "Vintage Bike",
     description: "Discover the Vintage Cruiser, a timeless symbol of elegance and nostalgia. With its classic design, sturdy steel frame, and vintage-inspired details, this bike captures the essence of a bygone era.",
     owner: 'Lyna Chikouche',
